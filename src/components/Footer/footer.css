@@ -1,0 +1,126 @@
+/* .footer{
+    background-color:rgba(9, 2, 26, 0.815) !important;
+    
+}
+.quick_links{
+    color:white;
+}
+.link_title{
+    font-weight: 400;
+    text-align: center;
+}
+.icon{
+    font-weight:600;
+    color:whitesmoke;
+    border-radius: 100px;
+
+
+}
+.Link h4{
+    font-size: 1rem;
+    font-weight: 200;
+    color:aliceblue;
+}
+.Link{
+    display : flex;
+    flex-direction:column;
+    align-items: center;
+    padding: .2rem;
+
+}
+.footer_head h1{
+    color:white;
+    font-weight:600;  
+    text-align: center;  
+}
+.footer_head p{
+    color:white;
+    font-weight:400;
+    line-height: 25px;
+}
+.logo{
+    font-weight: 600 !important;
+    color:aliceblue !important;
+} */
+
+
+.footer{
+    background-color: black;
+ }
+ .foot-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+
+ }
+ .foot-box{
+    height:300px;
+    width:300px;
+    display: flex;
+    flex-direction: column;
+ }
+ .foot-box a{
+    text-decoration: none;
+    
+
+ }
+ .footer .foot-container .foot-box h5{
+    font-size: 2rem;
+    padding: 1rem 0;
+    color: burlywood !important;
+    text-shadow: 1px 1px 2px burlywood;
+
+ }
+ .footer .foot-container .foot-box h5:hover{
+   font-size: 2.5rem;
+ }
+ 
+  .logo{
+    padding: 1rem 0;
+    height: 90px;
+    width: 60px;
+    
+ }
+ .logo:hover{
+   height: 100px;
+   width: 100px;
+ }
+ 
+ .footer .foot-container .foot-box .share .fab{
+   height: 3rem;
+   width: 3rem;
+   padding:1rem;
+   color:black !important;
+   background: #fff !important;
+   cursor: pointer;
+   border-radius: .5rem;
+    
+ }
+ .footer .foot-container .foot-box .share .fab:hover{
+ color: aqua !important;
+ padding: 0.5rem 0.5rem ; 
+}
+.foot-box .fas{
+    color: #ff7800 !important;
+}
+.foot-box .links{
+    padding:0.5rem 0;
+    color: white;
+}
+.foot-box .links:hover{
+   padding: 1rem ;
+   color: white !important;
+   text-transform: capitalize;
+   
+}
+ .credit{
+   text-align: center;
+   font-weight: 800;
+   color: #fff !important;
+   
+ }
+ .credit span{
+   color: cornflowerblue !important;
+ }
+ 

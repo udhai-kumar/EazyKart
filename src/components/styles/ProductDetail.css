@@ -1,0 +1,53 @@
+.product_details{
+    margin-top:50px;
+    padding-left:50px ;
+
+}
+.product_details h2{
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+.product_rating{
+font-weight: 600;
+}
+.icons{
+    color:rgb(221, 154, 10);
+    font-weight: 600;
+    padding:none ;
+}
+.icons:hover{
+    padding:5px;
+}
+.price{
+    font-size: 1rem;
+    font-weight: 400;
+}
+.tab_content{
+    font-weight:500;
+    font-size: 1rem;
+    color:rgba(0,0,21, .521);
+
+}
+.tab h1{
+    cursor:pointer;
+}
+.active_tab{
+    font-weight: 600;
+    cursor: pointer;
+
+}
+.review_tab{
+    line-height: 30px;
+    font-weight: 200;
+
+}
+.review_tab li h5{
+    font-weight:700;
+}
+.review_tab li span{
+    color:coral;
+    
+}
+.review_tab li p{
+    font-weight:400;
+}

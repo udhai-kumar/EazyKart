@@ -1,0 +1,30 @@
+.badge{
+    position: absolute;
+    content:'';
+    background-color: black ;
+    color: #fff;
+    border-radius:20px;
+    font-size:.6rem;
+    font-weight:600;
+    z-index:10;
+}
+.Icon{
+    font-weight: 600;
+    color:white;
+
+}
+.Header_right{
+    padding-left:20px !important;
+}
+.head{
+
+    font-weight: 500 !important;
+}
+.head :hover{
+    color: red !important;
+}
+.Brand_title{
+    font-weight: 800 !important;
+    text-shadow: 1px 1px 2px burlywood;
+
+}

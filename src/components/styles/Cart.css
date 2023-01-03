@@ -1,0 +1,23 @@
+ tbody tr td img{
+    object-fit: cover;
+}
+.delete{
+    color:red !important;
+    font-weight: 400 !important;
+    cursor:pointer;
+
+}
+.Checkout{
+    padding:20px;
+    background: rgb(12, 4, 61);
+    color: white;
+    border-radius: 5px;
+}
+.Checkout h4,h6{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.Checkout h6{
+    margin-bottom: 20px;
+}

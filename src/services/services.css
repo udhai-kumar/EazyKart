@@ -1,0 +1,29 @@
+.service_item{
+    padding: 20px;
+    background: rgb(218, 226, 240);
+    display:flex;
+    align-items: center;
+    column-gap: .5rem;
+    row-gap:0.5rem;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.service_item .icons{
+    font-size: 2.5rem;
+    background: var(--primary-color);
+    padding:10px;
+    border-radius: 50px;
+    color:yellow;
+    font-weight: 400;
+}
+.service_item h3{
+    font-size: 1.25rem;
+    font-weight: 800!important;
+}
+.service_item p{
+    font-size: 0.75rem;
+    margin-top: 5px;
+    color: rgb(20, 2, 2);
+    font-weight: 400!important;
+}

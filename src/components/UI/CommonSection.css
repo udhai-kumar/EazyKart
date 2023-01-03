@@ -1,0 +1,14 @@
+.shop_heading{
+    background: linear-gradient(rgba(0,0,0,0.562),rgba(0,0,0,0.562)),
+    url('https://assets-global.website-files.com/5ad4b5ac3265e94b4f4625ea/6179a579f91da881be2c758b_morning-brew-ShVipPImS6k-unsplash_5c8728bacb20daf02414ecbdf89e0418_2000.png') no-repeat center center;
+    background-size:cover;
+    min-height: 400px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+
+}
+.shop_heading  h2{
+    color: #fff;
+    font-weight:600;
+}
