@@ -9,7 +9,7 @@ import {FaFacebookF,FaInstagram,FaTwitter,FaLinkedin,FaEnvelope,FaPhone, FaLocat
 
 const Footer = () => {
   return (
-    <div>
+    <>
 
 <section className="footer" id="footer">
     <div className="container-fluid">
@@ -56,7 +56,7 @@ const Footer = () => {
     </div>
   </section>
 
-    </div>
+    </>
   )
 }
 
