@@ -13,38 +13,38 @@ graph TB
   subgraph ClientLayer ["1. Client & Presentation Layer"]
     HTML["index.html (Vite Entry)"]
     Theme["Theme Toggle (Dark / Light)"]
-    Metadata["Native React 19 Document Metadata (<title>, <meta>)"]
-    Router["AppRoutes (React Router v7 / Browser History)"]
+    Metadata["Native React 19 Document Metadata"]
+    Router["AppRoutes (React Router v7)"]
   end
 
   subgraph StateLayer ["2. React 19 State & Context Layer"]
     CartContext["CartContext (useActionState + useOptimistic)"]
     WishlistContext["WishlistContext (useOptimistic)"]
     ToastContext["ToastContext (Micro-Alerts)"]
-    ThemeContext["ThemeContext (System/LocalStorage Persistence)"]
+    ThemeContext["ThemeContext (LocalStorage Persistence)"]
   end
 
   subgraph ResourceLayer ["3. React 19 Resource & Suspense Layer"]
-    SuspenseBoundary["<Suspense> Boundaries"]
+    SuspenseBoundary["Suspense Boundaries"]
     UsePromise["React 19 use(promise) Hook"]
     Skeletons["ProductSkeleton (Shimmer Fallback)"]
-    PromiseCache["ProductService Promise Resolution & Cache"]
+    PromiseCache["ProductService Promise Cache"]
   end
 
   subgraph UILayer ["4. Component & Feature Layer"]
-    Header["Sticky Header + Live Search (Cmd/K) + Cart Badge"]
+    Header["Sticky Header + Search (Cmd/K) + Cart Badge"]
     HeroBanner["Hero Banner (Seasonal Slider & Category Pills)"]
-    ProductCards["ProductCard (Direct ref, Quick Add, Wishlist Heart)"]
+    ProductCards["ProductCard (Direct ref, Quick Add, Wishlist)"]
     QuickViewModal["QuickViewModal (Variant Pickers & Tabs)"]
-    FilterSidebar["FilterSidebar (Faceted Categories, Price Slider, Ratings)"]
-    CartDrawer["Slide-Over Cart Drawer (Free Shipping Bar, Coupons)"]
-    CheckoutModal["CheckoutModal (React 19 Form Actions, Receipt)"]
-    Footer["Footer (Newsletter, Trust Badges, Customer Care)"]
+    FilterSidebar["FilterSidebar (Faceted Filters)"]
+    CartDrawer["CartDrawer (Free Shipping Bar, Coupons)"]
+    CheckoutModal["CheckoutModal (Form Actions, Receipt)"]
+    Footer["Footer (Newsletter, Trust Badges)"]
   end
 
   subgraph DataLayer ["5. Strongly-Typed Data & Domain Layer"]
-    ProductsData["products.ts (Enriched Mock Catalog, Specs, Reviews)"]
-    TypeDefs["ecommerce.ts (TypeScript Interfaces & Discriminated Unions)"]
+    ProductsData["products.ts (Enriched Mock Catalog)"]
+    TypeDefs["ecommerce.ts (TypeScript Interfaces)"]
   end
 
   HTML --> Router
@@ -64,25 +64,25 @@ graph TB
 sequenceDiagram
   autonumber
   actor User as Shopper
-  participant UI as ProductCard / QuickView
-  participant Opt as useOptimistic (Cart State)
-  participant Action as useActionState (cartReducer)
-  participant Storage as LocalStorage
+  participant UI as "ProductCard / QuickView"
+  participant OptimisticState as "useOptimistic (Cart State)"
+  participant ActionReducer as "useActionState (Cart Reducer)"
+  participant Storage as "LocalStorage"
 
-  User->>UI: Clicks "Add to Cart" / Adjusts Quantity (+/-)
+  User->>UI: Clicks "Add to Cart" or Quantity Stepper (+/-)
   activate UI
-  UI->>Opt: startTransition -> setOptimisticCart(action)
-  activate Opt
-  Note over Opt: UI updates IMMEDIATELY (0ms lag)
-  Opt-->>User: Visual feedback, badge bounce & toast notification
-  deactivate Opt
+  UI->>OptimisticState: startTransition with setOptimisticCart(action)
+  activate OptimisticState
+  Note over OptimisticState: UI updates IMMEDIATELY (0ms lag)
+  OptimisticState-->>User: Visual feedback, badge bounce & toast notification
+  deactivate OptimisticState
 
-  UI->>Action: dispatchCartAction(action)
-  activate Action
-  Action->>Action: Pure synchronous cartReducer calculation
-  Action->>Storage: Persist { items, discountCode }
-  Action-->>Opt: Synchronize confirmed state
-  deactivate Action
+  UI->>ActionReducer: dispatchCartAction(action)
+  activate ActionReducer
+  ActionReducer->>ActionReducer: Pure synchronous cartReducer calculation
+  ActionReducer->>Storage: Persist items and coupon code
+  ActionReducer-->>OptimisticState: Synchronize confirmed state
+  deactivate ActionReducer
   deactivate UI
 ```
 
@@ -94,10 +94,10 @@ sequenceDiagram
 sequenceDiagram
   autonumber
   actor User as Shopper
-  participant Drawer as Cart Drawer
-  participant Modal as CheckoutModal
-  participant FormAction as useActionState (Checkout Action)
-  participant CartCtx as CartContext
+  participant Drawer as "Slide-Over Cart Drawer"
+  participant Modal as "Checkout Modal"
+  participant FormAction as "useActionState (Checkout Action)"
+  participant CartCtx as "Cart Context"
 
   User->>Drawer: Clicks "Proceed to Checkout"
   Drawer->>Modal: Opens Checkout Modal
@@ -105,14 +105,14 @@ sequenceDiagram
   User->>Modal: Clicks "Place Order & Pay"
 
   activate Modal
-  Modal->>FormAction: Native Form Action dispatch(formData)
+  Modal->>FormAction: Form action dispatches FormData
   activate FormAction
   FormAction->>FormAction: Validates inputs & generates Order Receipt
   FormAction->>CartCtx: clearCart()
-  FormAction-->>Modal: Returns { status: 'success', order: OrderReceipt }
+  FormAction-->>Modal: Returns success status and OrderReceipt
   deactivate FormAction
 
-  Modal-->>User: Displays Order Confirmation Receipt with Tracking #
+  Modal-->>User: Displays Order Confirmation Receipt with Tracking Number
   deactivate Modal
 ```
 
@@ -122,13 +122,13 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-  Start([Page Render: Home / Shop / ProductDetails]) --> CreatePromise[Create Memoized Resource Promise]
-  CreatePromise --> SuspenseCheck{Promise Resolved?}
+  Start([Page Render: Home / Shop / ProductDetails]) --> CreatePromise["Create Memoized Resource Promise"]
+  CreatePromise --> SuspenseCheck{"Promise Resolved?"}
 
-  SuspenseCheck -- "Pending" --> RenderSkeleton["Render <ProductSkeleton /> (Shimmer Fallback)"]
+  SuspenseCheck -- "Pending" --> RenderSkeleton["Render ProductSkeleton (Shimmer Fallback)"]
   SuspenseCheck -- "Resolved" --> UseHook["React 19 use(promise) extracts Data"]
 
-  UseHook --> RenderGrid["Render <ProductGrid /> / Product Cards"]
+  UseHook --> RenderGrid["Render ProductGrid / Product Cards"]
   RenderSkeleton -.-> SuspenseCheck
 ```
 
@@ -138,19 +138,19 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  Home["Home Page\n(Hero, Promos, Curated Picks)"] --> Search["Live Search Modal\n(Cmd/Ctrl + K Autocomplete)"]
-  Home --> Shop["Faceted Shop Page\n(Filters, Sort, View Modes)"]
+  Home["Home Page (Hero, Promos)"] --> Search["Live Search Modal (Cmd/K)"]
+  Home --> Shop["Faceted Shop (Filters, Sorter)"]
   
-  Search --> Details["Product Details Page\n(Specs, Reviews Form Action)"]
-  Shop --> QuickView["Quick-View Modal\n(Variant Pickers)"]
+  Search --> Details["Product Details (Specs, Reviews)"]
+  Shop --> QuickView["Quick-View Modal (Variants)"]
   Shop --> Details
 
-  QuickView --> Cart["Slide-Over Cart Drawer\n(Free Shipping Progress, Coupons)"]
+  QuickView --> Cart["Slide-Over Cart Drawer"]
   Details --> Cart
   Shop --> Cart
 
-  Cart --> Checkout["Checkout Modal\n(React 19 Form Action)"]
-  Checkout --> Receipt["Order Confirmation\n(Order ID, Tracking #)"]
+  Cart --> Checkout["Checkout Modal (Form Action)"]
+  Checkout --> Receipt["Order Confirmation (Order ID & Tracking #)"]
 ```
 
 ---
