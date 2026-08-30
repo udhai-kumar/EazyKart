@@ -1,6 +1,7 @@
 {
   "name": "eazykart",
   "version": "1.0.0",
+  "author": "udhai-kumar <udaisaravana@gmail.com>",
   "private": true,
   "type": "module",
   "scripts": {

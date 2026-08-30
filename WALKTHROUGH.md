@@ -92,7 +92,7 @@ sequenceDiagram
 ## 🚀 How to Run
 
 ```powershell
-cd "C:\Users\Admin\.gemini\antigravity-ide\scratch\New folder\EazyKart"
+cd EazyKart
 
 # Install dependencies if needed
 npm install
